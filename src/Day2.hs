@@ -55,10 +55,7 @@ score hand@(a, b) = (a' + handScore a, b' + handScore b)
     (a', b') = winScore hand
 
 handScore :: Num a => Hand -> a
-handScore hand = case hand of
-  Rock -> 1
-  Paper -> 2
-  Scissor -> 3
+handScore hand = fromJust . lookup hand $ zip values [1, 2, 3]
 
 winScore :: (Num a, Num b) => (Hand, Hand) -> (a, b)
 winScore hand
