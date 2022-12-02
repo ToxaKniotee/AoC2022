@@ -3,6 +3,7 @@ module Day2
   , part2
   ) where
 import Data.Maybe (fromJust)
+import Data.Tuple (swap)
 
 data Hand
   = Rock
@@ -14,13 +15,13 @@ values :: [Hand]
 values = [Rock, Paper, Scissor]
 
 winHands :: [(Hand, Hand)]
-winHands = zip values (tail values ++ [head values])
+winHands = zip values $ tail $ cycle values
 
 drawHands :: [(Hand, Hand)]
 drawHands = zip values values
 
 loseHands :: [(Hand, Hand)]
-loseHands = zip (tail values ++ [head values]) values
+loseHands = swap <$> winHands
 
 part1 :: IO Int
 part1 = sum . (snd . score . parseInput1 <$>) . lines <$> readFile "input/day2.txt"
@@ -32,11 +33,7 @@ parseInput1 :: String -> (Hand, Hand)
 parseInput1 s = case s of
   [a,' ',b] -> (parseLeft a, parseRight)
     where
-      parseRight = case b of
-        'X' -> Rock
-        'Y' -> Paper
-        'Z' -> Scissor
-        _ -> error $ "Unknown case :" ++ [a]
+      parseRight = fromJust . lookup b $ zip "XYZ" values
   e -> error $ "Unknown pattern " ++ e
 
 parseInput2 :: String -> (Hand, Hand)
@@ -44,21 +41,13 @@ parseInput2 s = case s of
   [a, ' ', b] -> (left, right)
     where
       left = parseLeft a
-      outcome = case b of
-        'X' -> loseHands
-        'Y' -> drawHands
-        'Z' -> winHands
-        _ -> error $ "Unknown case " ++ [b]
+      outcome = fromJust . lookup b $ zip "XYZ" [loseHands, drawHands, winHands]
       right = fromJust . lookup left $ outcome
   e -> error $ "UNknown pattern for line " ++ e
 
 
 parseLeft :: Char -> Hand
-parseLeft a = case a of
-  'A' -> Rock
-  'B' -> Paper
-  'C' -> Scissor
-  _ -> error $ "Unknown case :" ++ [a]
+parseLeft a = fromJust . lookup a $ zip "ABC" values
 
 score :: (Hand, Hand) -> (Int, Int)
 score hand@(a, b) = (a' + handScore a, b' + handScore b)
