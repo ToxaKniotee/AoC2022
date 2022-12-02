@@ -53,7 +53,6 @@ test-suite AdventOfCode2022-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Day2Tests
       Paths_AdventOfCode2022
   hs-source-dirs:
       test
