@@ -55,5 +55,8 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wno-missing-signatures
+
     dependencies:
     - AdventOfCode2022
+    - HUnit
