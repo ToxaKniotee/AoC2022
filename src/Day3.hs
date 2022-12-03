@@ -24,7 +24,7 @@ part1' :: String -> Int
 part1' = sum . (priority . common . halfs <$>) . lines
 
 part2' :: String -> Int
-part2' =  sum . (priority <$>) . (findCommon <$>) . (sort <$$>) . chunks 3 <$> lines
+part2' = sum . (priority . findCommon <$>) . (sort <$$>) . chunks 3 . lines
 
 halfs :: [a] -> ([a], [a])
 halfs xs = splitAt (length xs `div` 2) xs
