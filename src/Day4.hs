@@ -20,15 +20,12 @@ parseInput :: String -> (Set Int, Set Int)
 parseInput s = case parse parseRanges "" s of
   Left e -> error $ "Error parsing line " ++ show e
   Right r -> r
-
-parseRanges :: Parsec String () (Set Int, Set Int)
-parseRanges = do
-  left <- parseRange <* char ','
-  right <- parseRange
-  return (left, right)
-
-parseRange :: Parsec String () (Set Int)
-parseRange = do
-  a <- read <$> many digit <* char '-'
-  b <- read <$> many digit
-  return $ fromList [a .. b]
+  where
+    parseRange = do
+      a <- read <$> many digit <* char '-'
+      b <- read <$> many digit
+      return $ fromList [a .. b]
+    parseRanges = do
+      left <- parseRange <* char ','
+      right <- parseRange
+      return (left, right)
