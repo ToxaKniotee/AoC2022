@@ -3,13 +3,11 @@ module Day4
   , part2
   ) where
 
-import Data.Set as S
-import Data.List as L (filter)
-import Text.Parsec (parse, digit, char, Parsec)
-import Control.Applicative
+import Data.Set ( Set, disjoint, fromList, isSubsetOf )
+import Text.Parsec (Parsec, parse, digit, char, many)
 
 part1 :: IO Int
-part1 = length . L.filter isSubset . (parseInput <$>) . lines <$> readFile "input/day4.txt"
+part1 = length . filter isSubset . (parseInput <$>) . lines <$> readFile "input/day4.txt"
   where
     isSubset (a, b) = a `isSubsetOf` b || b `isSubsetOf` a
 
