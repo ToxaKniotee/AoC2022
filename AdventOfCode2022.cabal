@@ -28,6 +28,7 @@ library
       Day1
       Day2
       Day3
+      Day4
       Lib
   other-modules:
       Paths_AdventOfCode2022
@@ -36,6 +37,8 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
+    , containers
+    , parsec
   default-language: Haskell2010
 
 executable AdventOfCode2022-exe
@@ -48,6 +51,8 @@ executable AdventOfCode2022-exe
   build-depends:
       AdventOfCode2022
     , base >=4.7 && <5
+    , containers
+    , parsec
   default-language: Haskell2010
 
 test-suite AdventOfCode2022-test
@@ -62,4 +67,6 @@ test-suite AdventOfCode2022-test
       AdventOfCode2022
     , HUnit
     , base >=4.7 && <5
+    , containers
+    , parsec
   default-language: Haskell2010
