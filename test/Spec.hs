@@ -1,5 +1,6 @@
 import Day2
 import Day3
+import Day4
 import Test.HUnit
 
 main = runTestTTAndExit $ TestList 
@@ -12,5 +13,9 @@ main = runTestTTAndExit $ TestList
     , TestCase $ Day3.sample2 >>= assertEqual "Sample 2" 70
     , TestCase $ Day3.part1 >>= assertEqual "Part 1" 7691
     , TestCase $ Day3.part2 >>= assertEqual "Part 2" 2508
+    ]
+  , TestLabel "Day 4" $ TestList
+    [ TestCase $ Day4.part1 >>= (@=? 471)
+    , TestCase $ Day4.part2 >>= (@=? 888)
     ]
   ]
