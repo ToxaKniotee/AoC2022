@@ -4,28 +4,28 @@ module Day4
   ) where
 
 import Data.Set ( Set, disjoint, fromList, isSubsetOf )
-import Text.Parsec (Parsec, parse, digit, char, many)
+import Text.Parsec (parse, digit, char, many)
 
 part1 :: IO Int
-part1 = length . filter isSubset . (parseInput <$>) . lines <$> readFile "input/day4.txt"
+part1 = length . filter isSubset . map parseRanges . lines <$> readFile "input/day4.txt"
   where
     isSubset (a, b) = a `isSubsetOf` b || b `isSubsetOf` a
 
 part2 :: IO Int
-part2 = sum . fmap (intersect . parseInput) . lines <$> readFile "input/day4.txt"
+part2 = length . filter hasOverlap . map parseRanges . lines <$> readFile "input/day4.txt"
   where
-    intersect (a, b) = if a `disjoint` b then 0 else 1
+    hasOverlap (a, b) = not $ disjoint a b
 
-parseInput :: String -> (Set Int, Set Int)
-parseInput s = case parse parseRanges "" s of
+parseRanges :: String -> (Set Int, Set Int)
+parseRanges s = case parse rangesParser "" s of
   Left e -> error $ "Error parsing line " ++ show e
   Right r -> r
   where
-    parseRange = do
+    rangeParser = do
       a <- read <$> many digit <* char '-'
       b <- read <$> many digit
       return $ fromList [a .. b]
-    parseRanges = do
-      left <- parseRange <* char ','
-      right <- parseRange
+    rangesParser = do
+      left <- rangeParser <* char ','
+      right <- rangeParser
       return (left, right)
