@@ -24,6 +24,7 @@ dependencies:
 - containers
 - parsec
 - text
+- matrix
 
 ghc-options:
 - -Wall
@@ -35,6 +36,7 @@ ghc-options:
 - -Wmissing-home-modules
 - -Wpartial-fields
 - -Wredundant-constraints
+- -Wno-missing-signatures
 
 library:
   source-dirs: src
