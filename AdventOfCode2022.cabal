@@ -33,6 +33,7 @@ library
       Day6
       Day7
       Day8
+      Day9
       Lib
   other-modules:
       Paths_AdventOfCode2022
@@ -42,6 +43,7 @@ library
   build-depends:
       base >=4.7 && <5
     , containers
+    , grid
     , matrix
     , parsec
     , text
@@ -58,6 +60,7 @@ executable AdventOfCode2022-exe
       AdventOfCode2022
     , base >=4.7 && <5
     , containers
+    , grid
     , matrix
     , parsec
     , text
@@ -76,6 +79,7 @@ test-suite AdventOfCode2022-test
     , HUnit
     , base >=4.7 && <5
     , containers
+    , grid
     , matrix
     , parsec
     , text

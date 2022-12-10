@@ -25,6 +25,7 @@ dependencies:
 - parsec
 - text
 - matrix
+- grid
 
 ghc-options:
 - -Wall
